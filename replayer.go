@@ -27,7 +27,7 @@ func newReplayer(t *testing.T) http.RoundTripper {
 
 	rt, err := newReplayerFromFile(file + ".har")
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal("you must first record .har files with -watney")
 	}
 
 	return rt

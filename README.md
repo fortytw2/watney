@@ -43,5 +43,5 @@ func TestGoogle(t *testing.T) {
 LICENSE
 ------
 
-Originally derived from something that was in `github.com/cardigann/cardigann`,
+Originally derived from a helper I found in `github.com/cardigann/cardigann`,
 which is MIT licensed. The same license applies here
