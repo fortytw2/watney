@@ -17,6 +17,9 @@ fixtures unless `-watney` is set in the test flag.
 First record fixtures using `go test -watney -v ./...`, then replay them by
 omitting `-watney` in your future test runs.
 
+To record a single test, use `go test -watney -v -run CaseName` and a new `.har`
+will be written 
+
 ```go
 func TestGoogle(t *testing.T) {
     // you can use your own transport here, it is fully preserved during
