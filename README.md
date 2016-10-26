@@ -18,7 +18,11 @@ First record fixtures using `go test -watney -v ./...`, then replay them by
 omitting `-watney` in your future test runs.
 
 To record a single test, use `go test -watney -v -run CaseName` and a new `.har`
-will be written 
+will be written.
+
+Bonus! You can inspect any `.har` individually, with any number of tools,
+such as [HAR Viewer](http://www.softwareishard.com/har/viewer/), or [Har Viewer](https://ericduran.github.io/chromeHAR/)
+
 
 ```go
 func TestGoogle(t *testing.T) {
