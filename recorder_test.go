@@ -1,6 +1,7 @@
 package watney
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -37,4 +38,32 @@ func TestHarRecorder(t *testing.T) {
 		t.Fatalf(`Expected %q, got %q`, responseStr, greeting)
 	}
 
+}
+
+type customTransport struct {
+	Message string
+}
+
+func (rt customTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	return &http.Response{
+		Body: ioutil.NopCloser(
+			bytes.NewBufferString(rt.Message)),
+	}, nil
+}
+
+func TestCustomTransport(t *testing.T) {
+	expected := "custom transport"
+	c := &http.Client{
+		Transport: newRecorder(customTransport{
+			Message: expected,
+		}),
+	}
+
+	res, _ := c.Get("https://github.com")
+	actual, _ := ioutil.ReadAll(res.Body)
+	res.Body.Close()
+
+	if string(actual) != expected {
+		t.Fatalf(`expected '%s', got '%s'`, expected, actual)
+	}
 }

@@ -22,7 +22,7 @@ func newRecorder(t http.RoundTripper) http.RoundTripper {
 	hl.SetOption(har.BodyLogging(true))
 
 	return &recorder{
-		RoundTripper: http.DefaultTransport,
+		RoundTripper: t,
 		hl:           hl,
 	}
 }
