@@ -26,22 +26,23 @@ such as [HAR Viewer](http://www.softwareishard.com/har/viewer/), or [Har Viewer]
 
 ```go
 func TestGoogle(t *testing.T) {
-    // you can use your own transport here, it is fully preserved during
-    // recording
+	// you can use your own transport here, it is fully preserved during
+	// recording
 	tr := watney.Configure(http.DefaultTransport, t)
-    // writes to a file like watney_test.go.har
-    defer watney.Save(c)
 
 	c := &http.Client{
 		Transport: tr,
 	}
+
+	// writes to a file like watney_test.go.har
+	defer watney.Save(c)
 
 	resp, err := c.Get("https://www.google.com")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-    // test some things about resp
+	// test some things about resp
 
 	defer resp.Body.Close()
 }
