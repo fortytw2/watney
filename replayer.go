@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"runtime"
-	"testing"
 
 	"github.com/google/martian/har"
 )
@@ -19,7 +18,7 @@ type replayer struct {
 	entries []*har.Entry
 }
 
-func newReplayer(t *testing.T) http.RoundTripper {
+func newReplayer(t TestingT) http.RoundTripper {
 	_, file, num, ok := runtime.Caller(2)
 	if !ok {
 		fmt.Printf("called from %s#%d\n", file, num)
