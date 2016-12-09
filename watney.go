@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"runtime"
-	"testing"
 )
 
 var gold bool
@@ -17,8 +16,12 @@ func init() {
 	flag.Parse()
 }
 
+type TestingT interface {
+	Fatal(args ...interface{})
+}
+
 // Configure reconfigures a given http.Client to use a fixture provided transport
-func Configure(tr http.RoundTripper, t *testing.T) http.RoundTripper {
+func Configure(tr http.RoundTripper, t TestingT) http.RoundTripper {
 	if gold {
 		return newRecorder(tr)
 	}
